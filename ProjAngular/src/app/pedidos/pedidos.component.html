@@ -1,0 +1,123 @@
+<app-header></app-header>
+
+<main class="main-content">
+  <section class="orders-section">
+    <div class="orders-header">
+      <h2>Lista de Pedidos</h2>
+      <button class="add-btn" (click)="openModal()">+ Adicionar Pedido</button>
+    </div>
+
+    <table class="orders-table">
+      <thead>
+        <tr>
+          <th>Cliente</th>
+          <th>Data</th>
+          <th>Status</th>
+          <th>Valor total</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Vitórya Moraes</td>
+          <td>04/11/2025</td>
+          <td>OK</td>
+          <td>R$1.000,00</td>
+        </tr>
+        <tr>
+          <td>Vitórya Moraes</td>
+          <td>04/11/2025</td>
+          <td>OK</td>
+          <td>R$1.000,00</td>
+        </tr>
+        <tr>
+          <td>Vitórya Moraes</td>
+          <td>04/11/2025</td>
+          <td>OK</td>
+          <td>R$1.000,00</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- modal novo pedido -->
+  <div class="modal-backdrop" *ngIf="showModal" (click)="closeModal()"></div>
+
+  <div class="modal" *ngIf="showModal">
+    <div class="modal-content" (click)="$event.stopPropagation()">
+      <h3>Adicionar Cliente</h3>
+
+      <form (submit)="salvarPedido()">
+        <label>Cliente</label>
+        <!-- <select [(ngModel)]="novoCliente.tipo">
+          <option value="">Selecione...</option>
+          <option value="comum">1</option>
+          <option value="premium">2</option>
+          <option value="vip">3</option>
+        </select> -->
+
+        <div class="container-itens">
+          <!-- <button (click)="adicionarItem()">Adicionar item</button> -->
+
+          <table>
+            <thead>
+              <tr>
+                <th>Nome</th>
+                <th>Quantidade</th>
+                <th>Preço</th>
+                <th>Ações</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let item of itens; let i = index">
+                <td>
+                  <input
+                    type="text"
+                    [(ngModel)]="item.nome"
+                    placeholder="Nome do item"
+                  />
+                </td>
+                <td>
+                  <input
+                    type="number"
+                    [(ngModel)]="item.quantidade"
+                    placeholder="Qtd"
+                  />
+                </td>
+                <td>
+                  <input
+                    type="number"
+                    [(ngModel)]="item.preco"
+                    placeholder="Preço"
+                  />
+                </td>
+                <td>
+                  <!-- <button (click)="removerItem(i)">Excluir</button> -->
+                </td>
+              </tr>
+            </tbody>
+          </table>
+
+          <div class="total">
+            <strong>Total geral: </strong> R$
+            {{ calcularTotal() | number : "1.2-2" }}
+          </div>
+        </div>
+        <!--
+        <label>Email</label>
+        <input
+          type="email"
+          [(ngModel)]="novoCliente.email"
+          name="email"
+          required
+        /> -->
+
+        <div class="modal-buttons">
+          <button type="button" class="cancel-btn" (click)="closeModal()">
+            Cancelar
+          </button>
+          <button type="submit" class="save-btn">Salvar</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</main>

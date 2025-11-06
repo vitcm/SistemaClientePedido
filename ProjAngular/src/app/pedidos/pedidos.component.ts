@@ -1,26 +1,41 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { HeaderComponent } from '../header/header.component';
 import { RouterOutlet } from '@angular/router';
 
 @Component({
-  selector: 'app-root',
+  selector: 'app-pedidos',
   standalone: true,
-  imports: [RouterOutlet, HeaderComponent, FormsModule, CommonModule],
+  imports: [RouterOutlet, FormsModule, CommonModule],
   templateUrl: './pedidos.component.html',
   styleUrl: './pedidos.component.css',
 })
 export class PedidosComponent {
   showModal = false;
-
-  itens = [{ nome: 'Produto A', quantidade: 1, preco: 10.0 }];
+  itens = [{ nome: '', quantidade: 0, preco: 0 }];
+  novoCliente = { cliente: '', data: '', status: '', total: '' };
 
   salvarPedido() {}
 
   adicionarItem() {
     this.itens.push({ nome: '', quantidade: 0, preco: 0 });
   }
+
+  // addItem(index: number) {
+  //   const item = this.itens[index];
+
+  //   console.log('item', item);
+
+  //   if (item.quantidade <= 0 || item.preco < 0) {
+  //     alert(
+  //       'A quantidade deve ser maior que 0 e o preço não pode ser negativo.'
+  //     );
+  //     return;
+  //   }
+
+  //   const total = this.calcularTotal();
+  //   console.log('Total atualizado: R$', total.toFixed(2));
+  // }
 
   removerItem(index: number) {
     this.itens.splice(index, 1);
@@ -34,6 +49,7 @@ export class PedidosComponent {
   }
 
   openModal() {
+    this.itens = [];
     this.showModal = true;
   }
 

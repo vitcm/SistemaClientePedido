@@ -34,3 +34,7 @@
 .menu button:hover {
   background-color: #706b6b;
 }
+
+button.ativo {
+  background-color: #706b6b;
+}

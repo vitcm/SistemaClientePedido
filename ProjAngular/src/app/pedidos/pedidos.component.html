@@ -1,5 +1,3 @@
-<app-header></app-header>
-
 <main class="main-content">
   <section class="orders-section">
     <div class="orders-header">
@@ -7,36 +5,38 @@
       <button class="add-btn" (click)="openModal()">+ Adicionar Pedido</button>
     </div>
 
-    <table class="orders-table">
-      <thead>
-        <tr>
-          <th>Cliente</th>
-          <th>Data</th>
-          <th>Status</th>
-          <th>Valor total</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>Vitórya Moraes</td>
-          <td>04/11/2025</td>
-          <td>OK</td>
-          <td>R$1.000,00</td>
-        </tr>
-        <tr>
-          <td>Vitórya Moraes</td>
-          <td>04/11/2025</td>
-          <td>OK</td>
-          <td>R$1.000,00</td>
-        </tr>
-        <tr>
-          <td>Vitórya Moraes</td>
-          <td>04/11/2025</td>
-          <td>OK</td>
-          <td>R$1.000,00</td>
-        </tr>
-      </tbody>
-    </table>
+    <div class="table-wrapper">
+      <table class="orders-table">
+        <thead>
+          <tr>
+            <th>Cliente</th>
+            <th>Data</th>
+            <th>Status</th>
+            <th>Valor total</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Vitórya Moraes</td>
+            <td>04/11/2025</td>
+            <td>OK</td>
+            <td>R$1.000,00</td>
+          </tr>
+          <tr>
+            <td>Vitórya Moraes</td>
+            <td>04/11/2025</td>
+            <td>OK</td>
+            <td>R$1.000,00</td>
+          </tr>
+          <tr>
+            <td>Vitórya Moraes</td>
+            <td>04/11/2025</td>
+            <td>OK</td>
+            <td>R$1.000,00</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
   </section>
 
   <!-- modal novo pedido -->
@@ -46,76 +46,64 @@
     <div class="modal-content" (click)="$event.stopPropagation()">
       <h3>Adicionar Cliente</h3>
 
-      <form (submit)="salvarPedido()">
+      <form (ngSubmit)="salvarPedido()">
         <label>Cliente</label>
-        <!-- <select [(ngModel)]="novoCliente.tipo">
+        <select [(ngModel)]="novoCliente.cliente" name="cliente">
           <option value="">Selecione...</option>
           <option value="comum">1</option>
           <option value="premium">2</option>
           <option value="vip">3</option>
-        </select> -->
+        </select>
 
         <div class="container-itens">
-          <!-- <button (click)="adicionarItem()">Adicionar item</button> -->
+          <div class="items-container">
+            <div class="items-header">
+              <label>Itens</label>
+              <button type="button" class="add-btn" (click)="adicionarItem()">
+                Adicionar item
+              </button>
+            </div>
 
-          <table>
-            <thead>
-              <tr>
-                <th>Nome</th>
-                <th>Quantidade</th>
-                <th>Preço</th>
-                <th>Ações</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr *ngFor="let item of itens; let i = index">
-                <td>
-                  <input
-                    type="text"
-                    [(ngModel)]="item.nome"
-                    placeholder="Nome do item"
-                  />
-                </td>
-                <td>
-                  <input
-                    type="number"
-                    [(ngModel)]="item.quantidade"
-                    placeholder="Qtd"
-                  />
-                </td>
-                <td>
-                  <input
-                    type="number"
-                    [(ngModel)]="item.preco"
-                    placeholder="Preço"
-                  />
-                </td>
-                <td>
-                  <!-- <button (click)="removerItem(i)">Excluir</button> -->
-                </td>
-              </tr>
-            </tbody>
-          </table>
+            <div class="item-row" *ngFor="let item of itens; let i = index">
+              <input
+                type="text"
+                [(ngModel)]="item.nome"
+                name="nome{{ i }}"
+                placeholder="Nome do item"
+              />
+              <input
+                type="number"
+                [(ngModel)]="item.quantidade"
+                name="quantidade{{ i }}"
+                placeholder="Qtd"
+              />
+              <input
+                type="number"
+                [(ngModel)]="item.preco"
+                name="preco{{ i }}"
+                placeholder="Preço"
+              />
+              <!-- <button type="button" class="add-btn" (click)="addItem(i)">
+                Adicionar
+              </button> -->
+              <button type="button" class="delete-btn" (click)="removerItem(i)">
+                Excluir
+              </button>
+            </div>
+          </div>
+        </div>
 
+        <div class="footer">
           <div class="total">
             <strong>Total geral: </strong> R$
             {{ calcularTotal() | number : "1.2-2" }}
           </div>
-        </div>
-        <!--
-        <label>Email</label>
-        <input
-          type="email"
-          [(ngModel)]="novoCliente.email"
-          name="email"
-          required
-        /> -->
-
-        <div class="modal-buttons">
-          <button type="button" class="cancel-btn" (click)="closeModal()">
-            Cancelar
-          </button>
-          <button type="submit" class="save-btn">Salvar</button>
+          <div class="modal-buttons">
+            <button type="button" class="cancel-btn" (click)="closeModal()">
+              Cancelar
+            </button>
+            <button type="submit" class="save-btn">Salvar</button>
+          </div>
         </div>
       </form>
     </div>

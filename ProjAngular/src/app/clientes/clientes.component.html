@@ -1,0 +1,99 @@
+<main class="main-content">
+  <section class="clients-section">
+    <div class="clients-header">
+      <h2>Lista de Clientes</h2>
+      <button class="add-btn" (click)="openModal()">+ Adicionar Cliente</button>
+    </div>
+
+    <div class="search-bar">
+      <input
+        type="text"
+        placeholder="Pesquisar cliente..."
+        [(ngModel)]="termoPesquisa"
+        (input)="filtrarClientes()"
+      />
+    </div>
+
+    <div class="table-wrapper">
+      <table class="clients-table">
+        <thead>
+          <tr>
+            <th>Nome</th>
+            <th>Email</th>
+            <th>Ações</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let cliente of clientesFiltrados">
+            <td>{{ cliente.nome }}</td>
+            <td>{{ cliente.email }}</td>
+            <td>
+              <button class="edit-btn" (click)="openModal()">Editar</button>
+              <button class="delete-btn" (click)="openModalDelete()">
+                Excluir
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- modal novo/edição cliente -->
+  <div class="modal-backdrop" *ngIf="showModal" (click)="closeModal()"></div>
+
+  <div class="modal" *ngIf="showModal">
+    <div class="modal-content" (click)="$event.stopPropagation()">
+      <h3>Adicionar Cliente</h3>
+
+      <form (submit)="salvarCliente()">
+        <label>Nome</label>
+        <input
+          type="text"
+          [(ngModel)]="novoCliente.nome"
+          name="nome"
+          required
+        />
+
+        <label>Email</label>
+        <input
+          type="email"
+          [(ngModel)]="novoCliente.email"
+          name="email"
+          required
+        />
+
+        <div class="modal-buttons">
+          <button type="button" class="cancel-btn" (click)="closeModal()">
+            Cancelar
+          </button>
+          <button type="submit" class="save-btn">Salvar</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- modal exclsão cliente -->
+  <div
+    class="modal-backdrop"
+    *ngIf="showModalDelete"
+    (click)="closeModalDelete()"
+  ></div>
+
+  <div class="modal-delete" *ngIf="showModalDelete">
+    <div class="modal-content" (click)="$event.stopPropagation()">
+      <h3>Adicionar Cliente</h3>
+
+      <form (submit)="deletarCliente()">
+        <label>Tem certeza que deseja excluir esse cliente?</label>
+
+        <div class="modal-buttons">
+          <button type="button" class="cancel-btn" (click)="closeModalDelete()">
+            Cancelar
+          </button>
+          <button type="submit" class="save-btn">Deletar</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</main>

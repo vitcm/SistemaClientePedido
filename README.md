@@ -25,3 +25,5 @@ Dependências do Node/Angular:
 
 Versão Node: 20.18.1  
 Versão Angular: 19.2.19
+
+Banco de dados: PostgreSQL

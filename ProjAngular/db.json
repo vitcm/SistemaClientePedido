@@ -50,6 +50,13 @@
       "data_pedido": "2025-11-06T01:19:56.254Z",
       "status": "PENDENTE",
       "valor_total": "25.00"
+    },
+    {
+      "id": "ce98",
+      "cliente_id": "d2c3b4a5-9101-4f12-c3d4-e5f6a7b8c9d0",
+      "data_pedido": "2025-11-06T23:16:26.230Z",
+      "status": "CANCELADO",
+      "valor_total": "230.00"
     }
   ],
   "pedido_itens": [
@@ -80,6 +87,13 @@
       "produto_nome": "Nome",
       "quantidade": 10,
       "preco_unitario": 2.5
+    },
+    {
+      "id": "20b27d15-ac77-4770-972e-6e2dfad70484",
+      "pedido_id": "ce98",
+      "produto_nome": "Nome",
+      "quantidade": 10,
+      "preco_unitario": 23
     }
   ]
 }

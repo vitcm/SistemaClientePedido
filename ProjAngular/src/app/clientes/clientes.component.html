@@ -28,7 +28,9 @@
             <td>{{ cliente.nome }}</td>
             <td>{{ cliente.email }}</td>
             <td>
-              <button class="edit-btn" (click)="openModal()">Editar</button>
+              <button class="edit-btn" (click)="openModal(cliente)">
+                Editar
+              </button>
               <button class="delete-btn" (click)="openModalDelete(cliente.id)">
                 Excluir
               </button>
@@ -44,7 +46,7 @@
 
   <div class="modal" *ngIf="showModal">
     <div class="modal-content" (click)="$event.stopPropagation()">
-      <h3>Adicionar Cliente</h3>
+      <h3>{{ clienteEditando ? "Editar Cliente" : "Adicionar Cliente" }}</h3>
 
       <form (submit)="salvarCliente()">
         <label>Nome</label>
@@ -60,6 +62,14 @@
           type="email"
           [(ngModel)]="novoCliente.email"
           name="email"
+          required
+        />
+
+        <label>Telefone</label>
+        <input
+          type="telefone"
+          [(ngModel)]="novoCliente.telefone"
+          name="telefone"
           required
         />
 

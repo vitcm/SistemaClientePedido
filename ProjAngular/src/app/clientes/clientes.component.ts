@@ -19,12 +19,7 @@ export class ClientesComponent implements OnInit {
   showModal = false;
   showModalDelete = false;
   clienteParaDeletarId: string | null = null;
-
-  // clientes = [
-  //   { nome: 'Vitórya Moraes', email: 'vitorya.moraes@email.com' },
-  //   { nome: 'João Silva', email: 'joao.silva@email.com' },
-  //   { nome: 'Ana Souza', email: 'ana.souza@email.com' },
-  // ];
+  clienteEditando: Cliente | null = null;
 
   clientesFiltrados = [...this.clientes];
   novoCliente: Partial<Cliente> = { nome: '', email: '', telefone: '' };
@@ -48,13 +43,21 @@ export class ClientesComponent implements OnInit {
     });
   }
 
-  openModal() {
+  openModal(cliente?: Cliente) {
+    if (cliente) {
+      this.clienteEditando = cliente;
+      this.novoCliente = { ...cliente };
+    } else {
+      this.clienteEditando = null;
+      this.novoCliente = { nome: '', email: '', telefone: '' };
+    }
     this.showModal = true;
   }
 
   closeModal() {
     this.showModal = false;
-    this.novoCliente = { nome: '', email: '' };
+    this.clienteEditando = null;
+    this.novoCliente = { nome: '', email: '', telefone: '' };
   }
 
   openModalDelete(id: string) {
@@ -80,13 +83,25 @@ export class ClientesComponent implements OnInit {
       telefone: this.novoCliente.telefone ?? '',
     };
 
-    this.clientesService.addCliente(clienteParaSalvar).subscribe({
-      next: () => {
-        this.closeModal();
-        this.carregarClientes();
-      },
-      error: (err) => console.error('Erro ao adicionar cliente', err),
-    });
+    if (this.clienteEditando) {
+      this.clientesService
+        .updateCliente(this.clienteEditando.id, clienteParaSalvar)
+        .subscribe({
+          next: () => {
+            this.closeModal();
+            this.carregarClientes();
+          },
+          error: (err) => console.error('Erro ao atualizar cliente', err),
+        });
+    } else {
+      this.clientesService.addCliente(clienteParaSalvar).subscribe({
+        next: () => {
+          this.closeModal();
+          this.carregarClientes();
+        },
+        error: (err) => console.error('Erro ao adicionar cliente', err),
+      });
+    }
   }
 
   deletarCliente() {

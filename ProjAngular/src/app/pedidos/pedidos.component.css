@@ -249,3 +249,35 @@
 .save-btn:hover {
   background: #706b6b;
 }
+
+.status-box {
+  width: 50px;
+  height: 16px;
+  border-radius: 4px;
+  display: inline-block;
+}
+
+.status-A {
+  background-color: green;
+}
+
+.status-P {
+  background-color: yellow;
+}
+
+.status-C {
+  background-color: red;
+}
+
+.search-bar {
+  margin: 1rem 0;
+}
+
+.search-bar input {
+  width: 100%;
+  max-width: 300px;
+  padding: 0.6rem 1rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 0.95rem;
+}

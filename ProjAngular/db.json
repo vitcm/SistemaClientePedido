@@ -1,0 +1,85 @@
+{
+  "clientes": [
+    {
+      "id": "b8a1d1e0-1234-4c90-a1d9-1c2b3a4e5f6a",
+      "nome": "Vitórya Moraes",
+      "email": "vitorya.moraes@email.com",
+      "telefone": "(11) 99999-0001",
+      "criado_em": "2025-11-05T10:00:00Z"
+    },
+    {
+      "id": "c1b2a3d4-5678-4a90-b2c3-d4e5f6a7b8c9",
+      "nome": "João Silva",
+      "email": "joao.silva@email.com",
+      "telefone": "(21) 98888-2222",
+      "criado_em": "2025-11-04T09:30:00Z"
+    },
+    {
+      "id": "d2c3b4a5-9101-4f12-c3d4-e5f6a7b8c9d0",
+      "nome": "Ana Souza",
+      "email": "ana.souza@email.com",
+      "telefone": "(31) 97777-3333",
+      "criado_em": "2025-11-03T15:45:00Z"
+    }
+  ],
+  "pedidos": [
+    {
+      "id": "p1a2b3c4-d5e6-7890-f1a2-b3c4d5e6f7a8",
+      "cliente_id": "b8a1d1e0-1234-4c90-a1d9-1c2b3a4e5f6a",
+      "data_pedido": "2025-11-05T13:20:00Z",
+      "status": "APROVADO",
+      "valor_total": 1200.5
+    },
+    {
+      "id": "p2b3c4d5-e6f7-8901-a2b3-c4d5e6f7a8b9",
+      "cliente_id": "c1b2a3d4-5678-4a90-b2c3-d4e5f6a7b8c9",
+      "data_pedido": "2025-11-04T16:00:00Z",
+      "status": "PENDENTE",
+      "valor_total": 800
+    },
+    {
+      "id": "p3c4d5e6-f7a8-9012-b3c4-d5e6f7a8b9c0",
+      "cliente_id": "d2c3b4a5-9101-4f12-c3d4-e5f6a7b8c9d0",
+      "data_pedido": "2025-11-03T18:45:00Z",
+      "status": "CANCELADO",
+      "valor_total": 300.75
+    },
+    {
+      "id": "f1fe",
+      "cliente_id": "b8a1d1e0-1234-4c90-a1d9-1c2b3a4e5f6a",
+      "data_pedido": "2025-11-06T01:19:56.254Z",
+      "status": "PENDENTE",
+      "valor_total": "25.00"
+    }
+  ],
+  "pedido_itens": [
+    {
+      "id": "i1a2b3c4-d5e6-7890-f1a2-b3c4d5e6f7a8",
+      "pedido_id": "p1a2b3c4-d5e6-7890-f1a2-b3c4d5e6f7a8",
+      "produto_nome": "Notebook Dell XPS 13",
+      "quantidade": 1,
+      "preco_unitario": 1200.5
+    },
+    {
+      "id": "i2b3c4d5-e6f7-8901-a2b3-c4d5e6f7a8b9",
+      "pedido_id": "p2b3c4d5-e6f7-8901-a2b3-c4d5e6f7a8b9",
+      "produto_nome": "Monitor LG Ultrawide",
+      "quantidade": 2,
+      "preco_unitario": 400
+    },
+    {
+      "id": "i3c4d5e6-f7a8-9012-b3c4-d5e6f7a8b9c0",
+      "pedido_id": "p3c4d5e6-f7a8-9012-b3c4-d5e6f7a8b9c0",
+      "produto_nome": "Mouse Logitech MX Master 3",
+      "quantidade": 1,
+      "preco_unitario": 300.75
+    },
+    {
+      "id": "d4467c3b-5ed2-4c28-8a00-2050da392325",
+      "pedido_id": "f1fe",
+      "produto_nome": "Nome",
+      "quantidade": 10,
+      "preco_unitario": 2.5
+    }
+  ]
+}

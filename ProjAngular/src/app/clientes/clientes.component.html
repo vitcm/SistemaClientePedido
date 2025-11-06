@@ -8,7 +8,7 @@
     <div class="search-bar">
       <input
         type="text"
-        placeholder="Pesquisar cliente..."
+        placeholder="Pesquisar cliente por nome"
         [(ngModel)]="termoPesquisa"
         (input)="filtrarClientes()"
       />
@@ -29,7 +29,7 @@
             <td>{{ cliente.email }}</td>
             <td>
               <button class="edit-btn" (click)="openModal()">Editar</button>
-              <button class="delete-btn" (click)="openModalDelete()">
+              <button class="delete-btn" (click)="openModalDelete(cliente.id)">
                 Excluir
               </button>
             </td>

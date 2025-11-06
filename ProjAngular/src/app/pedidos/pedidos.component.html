@@ -5,6 +5,15 @@
       <button class="add-btn" (click)="openModal()">+ Adicionar Pedido</button>
     </div>
 
+    <div class="search-bar">
+      <input
+        type="text"
+        placeholder="Pesquisar pedido por cliente ou status"
+        [(ngModel)]="termoPesquisa"
+        (input)="filtrarPedidos()"
+      />
+    </div>
+
     <div class="table-wrapper">
       <table class="orders-table">
         <thead>
@@ -16,23 +25,20 @@
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>Vitórya Moraes</td>
-            <td>04/11/2025</td>
-            <td>OK</td>
-            <td>R$1.000,00</td>
-          </tr>
-          <tr>
-            <td>Vitórya Moraes</td>
-            <td>04/11/2025</td>
-            <td>OK</td>
-            <td>R$1.000,00</td>
-          </tr>
-          <tr>
-            <td>Vitórya Moraes</td>
-            <td>04/11/2025</td>
-            <td>OK</td>
-            <td>R$1.000,00</td>
+          <tr *ngFor="let pedido of pedidosFiltrados">
+            <td>{{ getNomeCliente(pedido.cliente_id) }}</td>
+            <td>{{ pedido.data_pedido | date : "short" }}</td>
+            <td>
+              <span
+                class="status-box"
+                [ngClass]="{
+                  'status-A': pedido.status === 'APROVADO',
+                  'status-P': pedido.status === 'PENDENTE',
+                  'status-C': pedido.status === 'CANCELADO'
+                }"
+              ></span>
+            </td>
+            <td>{{ pedido.valor_total | number : "1.2-2" }}</td>
           </tr>
         </tbody>
       </table>
@@ -48,11 +54,11 @@
 
       <form (ngSubmit)="salvarPedido()">
         <label>Cliente</label>
-        <select [(ngModel)]="novoCliente.cliente" name="cliente">
+        <select [(ngModel)]="novoPedido.cliente_id" name="cliente" required>
           <option value="">Selecione...</option>
-          <option value="comum">1</option>
-          <option value="premium">2</option>
-          <option value="vip">3</option>
+          <option *ngFor="let cliente of clientes" [value]="cliente.id">
+            {{ cliente.nome }}
+          </option>
         </select>
 
         <div class="container-itens">
@@ -67,7 +73,7 @@
             <div class="item-row" *ngFor="let item of itens; let i = index">
               <input
                 type="text"
-                [(ngModel)]="item.nome"
+                [(ngModel)]="item.produto_nome"
                 name="nome{{ i }}"
                 placeholder="Nome do item"
               />
@@ -79,7 +85,7 @@
               />
               <input
                 type="number"
-                [(ngModel)]="item.preco"
+                [(ngModel)]="item.preco_unitario"
                 name="preco{{ i }}"
                 placeholder="Preço"
               />

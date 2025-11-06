@@ -16,6 +16,8 @@ Para rodar o programa:
 http://localhost:4200/ para o frontend  
 http://localhost:3000/ para ver a APIJson rodando
 
+EXTRA: Para rodar os testes, abrir o terminal e digitar o comando ng test.
+
 Dependências do Node/Angular:
 
 - express (npm install express uuid)

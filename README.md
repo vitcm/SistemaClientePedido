@@ -8,8 +8,8 @@ SQL (contém todas as queries exigidas no exercício, organizadas por arquivo);
 
 Para rodar o programa:  
 1 - Clonar/baixar o repositório  
-2 - Abrir dois terminais  
-3 - Nos dois terminais: cd ProjAngular  
+2 - Abrir dois terminais 
+3 - Nos dois terminais: cd ProjAngular (em um deles rodar o npm install para instalar todas as dependências do projeto)
 4 - Primeiro terminal: ng serve  
 5 - Segundo terminal: json-server --watch db.json --port 3000  
 6 - abrir os links:  

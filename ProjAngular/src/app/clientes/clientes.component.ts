@@ -88,18 +88,20 @@ export class ClientesComponent implements OnInit {
         .updateCliente(this.clienteEditando.id, clienteParaSalvar)
         .subscribe({
           next: () => {
+            alert('Cliente atualizado com sucesso!');
             this.closeModal();
             this.carregarClientes();
           },
-          error: (err) => console.error('Erro ao atualizar cliente', err),
+          error: (err) => alert('Erro ao atualizar cliente'),
         });
     } else {
       this.clientesService.addCliente(clienteParaSalvar).subscribe({
         next: () => {
+          alert('Cliente adicionado com sucesso!');
           this.closeModal();
           this.carregarClientes();
         },
-        error: (err) => console.error('Erro ao adicionar cliente', err),
+        error: (err) => alert('Erro ao adicionar cliente'),
       });
     }
   }
@@ -125,13 +127,14 @@ export class ClientesComponent implements OnInit {
           .deleteCliente(this.clienteParaDeletarId!)
           .subscribe({
             next: () => {
+              alert('Cliente excluído com sucesso!');
               this.closeModalDelete();
               this.carregarClientes();
             },
-            error: (err) => console.error('Erro ao excluir cliente', err),
+            error: (err) => alert('Erro ao excluir cliente'),
           });
       },
-      error: (err) => console.error('Erro ao verificar pedidos', err),
+      error: (err) => alert('Erro ao verificar pedidos'),
     });
   }
 

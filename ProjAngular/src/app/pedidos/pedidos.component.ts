@@ -28,6 +28,7 @@ export class PedidosComponent implements OnInit {
   novoPedido = { cliente_id: '', valor_total: 0 };
   novoCliente = { cliente: '', data: '', status: '', total: '' };
   pedidosFiltrados = [...this.pedidos];
+  isViewMode = false;
 
   constructor(
     private pedidosService: PedidosService,
@@ -110,8 +111,13 @@ export class PedidosComponent implements OnInit {
 
         this.closeModal();
         this.carregarPedidos();
+
+        alert('Pedido salvo com sucesso!');
       },
-      error: (err) => console.error('Erro ao salvar pedido', err),
+      error: (err) => {
+        console.error('Erro ao salvar pedido', err);
+        alert('Erro ao salvar pedido.');
+      },
     });
   }
 
@@ -136,10 +142,24 @@ export class PedidosComponent implements OnInit {
   }
 
   openModal() {
+    this.isViewMode = false;
     this.itens = [];
-    this.novoCliente = { cliente: '', data: '', status: '', total: '' };
-    this.termoPesquisa = '';
+    this.novoPedido = { cliente_id: '', valor_total: 0 };
     this.showModal = true;
+  }
+
+  openViewModal(pedido: Pedido) {
+    this.isViewMode = true;
+    this.showModal = true;
+    this.novoPedido = {
+      cliente_id: pedido.cliente_id,
+      valor_total: Number(pedido.valor_total),
+    };
+
+    this.pedidosService.getItensPorPedido(pedido.id).subscribe({
+      next: (itens) => (this.itens = itens),
+      error: (err) => console.error('Erro ao carregar itens do pedido', err),
+    });
   }
 
   closeModal() {

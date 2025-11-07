@@ -20,6 +20,12 @@
       "email": "ana.souza@email.com",
       "telefone": "(31) 97777-3333",
       "criado_em": "2025-11-03T15:45:00Z"
+    },
+    {
+      "id": "0d03",
+      "nome": "Josane Moraes",
+      "email": "josane@email.com",
+      "telefone": ""
     }
   ],
   "pedidos": [
@@ -57,6 +63,20 @@
       "data_pedido": "2025-11-06T23:16:26.230Z",
       "status": "CANCELADO",
       "valor_total": "230.00"
+    },
+    {
+      "id": "1b82",
+      "cliente_id": "c1b2a3d4-5678-4a90-b2c3-d4e5f6a7b8c9",
+      "data_pedido": "2025-11-06T23:47:39.441Z",
+      "status": "PENDENTE",
+      "valor_total": "97.20"
+    },
+    {
+      "id": "0ea5",
+      "cliente_id": "0d03",
+      "data_pedido": "2025-11-06T23:55:27.725Z",
+      "status": "CANCELADO",
+      "valor_total": "200.00"
     }
   ],
   "pedido_itens": [
@@ -94,6 +114,27 @@
       "produto_nome": "Nome",
       "quantidade": 10,
       "preco_unitario": 23
+    },
+    {
+      "id": "2136be1a-c311-4567-be6d-8f09ef8fcfb6",
+      "pedido_id": "1b82",
+      "produto_nome": "Item 1",
+      "quantidade": 9,
+      "preco_unitario": 9.8
+    },
+    {
+      "id": "7d38faa8-22fe-4ed8-8747-201170bcd47f",
+      "pedido_id": "1b82",
+      "produto_nome": "Item 2",
+      "quantidade": 2,
+      "preco_unitario": 4.5
+    },
+    {
+      "id": "d878dd9a-20d0-4802-a0c1-46a3afe1a9d5",
+      "pedido_id": "0ea5",
+      "produto_nome": "Item",
+      "quantidade": 1,
+      "preco_unitario": 200
     }
   ]
 }

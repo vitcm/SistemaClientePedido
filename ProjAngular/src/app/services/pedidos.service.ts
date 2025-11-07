@@ -10,11 +10,20 @@ export interface Pedido {
   valor_total: string;
 }
 
+export interface PedidoItem {
+  id: string;
+  pedido_id: string;
+  produto_nome: string;
+  quantidade: number;
+  preco_unitario: number;
+}
+
 @Injectable({
   providedIn: 'root',
 })
 export class PedidosService {
   private apiUrl = 'http://localhost:3000/pedidos';
+  private itensUrl = 'http://localhost:3000/pedido_itens';
 
   constructor(private http: HttpClient) {}
 
@@ -28,6 +37,12 @@ export class PedidosService {
 
   addPedidoItem(item: any): Observable<any> {
     return this.http.post<any>('http://localhost:3000/pedido_itens', item);
+  }
+
+  getItensPorPedido(pedidoId: string): Observable<PedidoItem[]> {
+    return this.http.get<PedidoItem[]>(
+      `${this.itensUrl}?pedido_id=${pedidoId}`
+    );
   }
 
   // updatePedido(id: string, pedido: Partial<Pedido>): Observable<Pedido> {

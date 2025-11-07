@@ -25,7 +25,10 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let pedido of pedidosFiltrados">
+          <tr
+            *ngFor="let pedido of pedidosFiltrados"
+            (click)="openViewModal(pedido)"
+          >
             <td>{{ getNomeCliente(pedido.cliente_id) }}</td>
             <td>{{ pedido.data_pedido | date : "short" }}</td>
             <td>
@@ -50,9 +53,10 @@
 
   <div class="modal" *ngIf="showModal">
     <div class="modal-content" (click)="$event.stopPropagation()">
-      <h3>Adicionar Cliente</h3>
+      <h3 *ngIf="!isViewMode">Adicionar Pedido</h3>
+      <h3 *ngIf="isViewMode">Visualizar Pedido</h3>
 
-      <form (ngSubmit)="salvarPedido()">
+      <form *ngIf="!isViewMode" (ngSubmit)="salvarPedido()">
         <label>Cliente</label>
         <select [(ngModel)]="novoPedido.cliente_id" name="cliente" required>
           <option value="">Selecione...</option>
@@ -112,6 +116,42 @@
           </div>
         </div>
       </form>
+
+      <!-- modo visualizaçao -->
+      <div *ngIf="isViewMode">
+        <label>Cliente</label>
+        <input
+          type="text"
+          [value]="getNomeCliente(novoPedido.cliente_id)"
+          readonly
+        />
+
+        <div class="container-itens">
+          <div class="items-container">
+            <div class="items-header">
+              <label>Itens</label>
+            </div>
+
+            <div class="item-row" *ngFor="let item of itens">
+              <input type="text" [value]="item.produto_nome" readonly />
+              <input type="number" [value]="item.quantidade" readonly />
+              <input type="number" [value]="item.preco_unitario" readonly />
+            </div>
+          </div>
+        </div>
+
+        <div class="footer">
+          <div class="total">
+            <strong>Total geral: </strong> R$
+            {{ calcularTotal() | number : "1.2-2" }}
+          </div>
+          <div class="modal-buttons">
+            <button type="button" class="cancel-btn" (click)="closeModal()">
+              Fechar
+            </button>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </main>
